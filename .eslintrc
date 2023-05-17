@@ -1,3 +1,7 @@
 {
-  "extends": "@eye-socket/eslint-config-vue"
+  "extends": "@eye-socket/eslint-config-vue",
+  "rules": {
+    "vue-scoped-css/enforce-style-type": "off",
+    "@typescript-eslint/no-empty-interface": "off"
+  }
 }
