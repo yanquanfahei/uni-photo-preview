@@ -6,7 +6,7 @@
     />
     <view class="text-area">
       <text class="title">
-        {{ title }}
+        {{ title }} world
       </text>
     </view>
   </view>

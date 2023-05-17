@@ -86,6 +86,6 @@
     "commit-msg": "node scripts/verify-commit.js"
   },
   "lint-staged": {
-    "src/**/*.{ts,js,vue}": "eslint"
+    "src/**/*.{ts,js,vue}": "eslint --fix"
   }
 }
