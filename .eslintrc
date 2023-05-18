@@ -1,4 +1,7 @@
 {
+  "globals": {
+    "uni": true
+  },
   "extends": "@eye-socket/eslint-config-vue",
   "rules": {
     "vue-scoped-css/enforce-style-type": "off",
