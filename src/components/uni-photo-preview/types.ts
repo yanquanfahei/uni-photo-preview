@@ -7,3 +7,5 @@ export type PhotoItem = {
   src: string
   getPhotoItemRect: (callback?: RectCb) => void
 }
+
+export type RegisterPhotoItem = (photoItem: PhotoItem) => void

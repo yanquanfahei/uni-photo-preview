@@ -1,24 +1,34 @@
 <template>
   <slot />
+  <PhotoSlider
+    :visible="visible"
+    :index="index"
+    :items="items"
+  />
 </template>
 
 <script setup lang="ts">
-import { provide, ref } from 'vue'
+import { provide } from 'vue'
 import { InjectionRegisterPhotoItem } from '../constant'
-import type { PhotoItem } from '../types'
+import PhotoSlider from '../PhotoSlider/PhotoSlider.vue'
+import useIndex from './hooks/useIndex'
+import useItems from './hooks/useItems'
+import useVisible from './hooks/useVisible'
 
-const images = ref<PhotoItem[]>([])
+const emit = defineEmits(['indexChange', 'visibleChange'])
+
+const onIndexChange = () => {
+  emit('indexChange', { index, items, visible })
+}
+const onVisibleChange = () => {
+  emit('visibleChange', { index, items, visible })
+}
+
+const { index } = useIndex(onIndexChange)
+const { items, registerPhotoItem } = useItems()
+const { visible } = useVisible(items, index, onVisibleChange)
 
 provide(InjectionRegisterPhotoItem, registerPhotoItem)
-// 注册照片项或者更新
-function registerPhotoItem (photoItem: PhotoItem) {
-  const matchIdx = images.value.findIndex(item => item.key === photoItem.key)
-  if (matchIdx !== -1) {
-    images.value.splice(matchIdx, 1, photoItem)
-    return
-  }
-  images.value.push(photoItem)
-}
 
 </script>
 
