@@ -1,46 +1,45 @@
 <template>
   <view class="content">
-    <image
-      class="logo"
-      src="/static/logo.png"
-    />
-    <view class="text-area">
-      <text class="title">
-        {{ title }} world
-      </text>
-    </view>
+    <PhotoProvider>
+      <view
+        v-for="(item, idx) in imgList"
+        :key="idx"
+        class="item"
+      >
+        <PhotoConsumer :src="item">
+          <img
+            class="photo"
+            :src="item"
+            alt="photo"
+          >
+        </PhotoConsumer>
+      </view>
+    </PhotoProvider>
   </view>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-const title = ref('Hello')
+import { PhotoProvider, PhotoConsumer } from '@/components/uni-photo-preview'
+import photo1 from '@/static/images/1.jpg'
+import photo2 from '@/static/images/2.jpg'
+import photo3 from '@/static/images/3.jpg'
+import photo4 from '@/static/images/4.png'
+import photo5 from '@/static/images/5.jpg'
+import photo6 from '@/static/images/6.png'
+import photo7 from '@/static/images/7.jpg'
+import photo8 from '@/static/images/8.jpg'
+
+const imgList = [photo1, photo2, photo3, photo4, photo5, photo6, photo7, photo8]
 </script>
 
 <style scoped>
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.photo {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
 }
-
-.logo {
-  height: 200rpx;
-  width: 200rpx;
-  margin-top: 200rpx;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 50rpx;
-}
-
-.text-area {
-  display: flex;
-  justify-content: center;
-}
-
-.title {
-  font-size: 36rpx;
-  color: #8f8f94;
+.item {
+  display: inline-block;
+  margin: 12px;
 }
 </style>
