@@ -11,14 +11,22 @@
       class="photo-view"
       style="width: 100%"
     >
-      <image
-        class="photo"
-        :src="src"
+      <view
+        class="photo-wrap"
         :style="{
           width: `${width}px`,
           height: `${height}px`
         }"
-      />
+      >
+        <image
+          class="photo"
+          :src="src"
+          :style="{
+            width: `${width}px`,
+            height: `${height}px`
+          }"
+        />
+      </view>
     </view>
   </view>
 </template>

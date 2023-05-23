@@ -5,10 +5,12 @@
       style="background: rgb(0, 0, 0);"
     />
     <view
-      v-for="(item) in showItems"
+      v-for="(item, currentIndex) in showItems"
       :key="item.key"
       class="photo-box"
-      style="left: 0px; transform: translate3d(0px, 0px, 0px);"
+      :style="{
+        left: getItemLeft(currentIndex)
+      }"
     >
       <PhotoView
         :src="item.src"
@@ -18,9 +20,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import PhotoView from '../PhotoView/PhotoView.vue'
 import type { PhotoItem } from '../types'
+import { horizontalOffset } from '../constant'
 
 const props = withDefaults(defineProps<{
   index: number
@@ -40,6 +43,16 @@ const showItems = computed(() => {
 
   return props.items.slice(Math.max(props.index - 1, 0), Math.min(props.index + 2, len))
 })
+
+const virtualIndex = ref(0)
+function getItemLeft (currentIndex: number) {
+  let index = virtualIndex.value + currentIndex
+  if (props.loop || props.index !== 0) {
+    index -= 1
+  }
+  // TODO:替换为小程序兼容的
+  return `${(innerWidth + horizontalOffset) * index}px`
+}
 
 </script>
 
